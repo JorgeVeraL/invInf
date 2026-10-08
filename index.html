@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Misión: el cumple de Mateo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{--noche:#1f1757;--noche2:#2b2275;--cohete:#ff5d4a;--sol:#ffc93c;--menta:#3fd6b0;--luna:#fff6e0;--tinta:#1f1757;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--noche);color:var(--luna);font-family:'Nunito','Trebuchet MS',sans-serif;font-size:1.1rem;line-height:1.55;overflow-x:hidden}
+body.locked{overflow:hidden}
+h1,h2,h3,.big{font-family:'Baloo 2','Arial Rounded MT Bold',sans-serif;line-height:1.05}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+#stars i{position:absolute;border-radius:50%;background:#fff;animation:tw 3s infinite ease-in-out}
+@keyframes tw{50%{opacity:.2;transform:scale(.6)}}
+main,section{position:relative;z-index:1}
+section{max-width:620px;margin:0 auto;padding:4.2rem 1.4rem;text-align:center}
+h2{font-size:2.4rem;font-weight:800;color:var(--sol);margin-bottom:.5rem}
+.lead{opacity:.85;margin-bottom:1.8rem}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sol);outline-offset:3px}
+.btn{display:inline-block;padding:.8rem 1.6rem;border:0;border-radius:999px;background:var(--sol);color:var(--tinta);font:800 1.05rem 'Nunito',sans-serif;cursor:pointer;text-decoration:none;box-shadow:0 5px 0 #c99a12;transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #c99a12}
+.btn.menta{background:var(--menta);box-shadow:0 5px 0 #1f9f80}
+.btn.menta:active{box-shadow:0 1px 0 #1f9f80}
+.btn.rojo{background:var(--cohete);color:#fff;box-shadow:0 5px 0 #b93a2b}
+.btn.sm{padding:.5rem 1.1rem;font-size:.95rem;margin:.2rem}
+.card{background:var(--luna);color:var(--tinta);border-radius:26px;padding:1.5rem 1.3rem;text-align:left}
+/* portada */
+#cover{position:fixed;inset:0;z-index:60;background:radial-gradient(ellipse at 50% 100%,#3a2d9a,var(--noche) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem;overflow:hidden;transition:opacity .8s}
+#cover.gone{opacity:0;pointer-events:none}
+#cover p.k{color:var(--menta);font-weight:800;letter-spacing:.04em}
+#cover h1{font-size:clamp(3rem,14vw,5.6rem);color:var(--sol);text-shadow:0 5px 0 #c4561c;margin:.2rem 0}
+.age{position:relative;width:132px;height:132px;border-radius:50%;background:var(--cohete);display:flex;align-items:center;justify-content:center;font-size:5.4rem;font-family:'Baloo 2',sans-serif;font-weight:800;color:#fff;margin:.8rem 0 1rem;box-shadow:inset -10px -10px 0 rgba(0,0,0,.15);animation:bob 3s ease-in-out infinite}
+.age:after{content:"";position:absolute;left:-26px;right:-26px;top:50%;height:22px;margin-top:-11px;border:4px solid var(--sol);border-radius:50%;transform:rotate(-18deg);clip-path:polygon(0 50%,100% 50%,100% 100%,0 100%)}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.date{font-weight:800;margin-bottom:1.4rem}
+#rocket{width:96px;margin-top:.4rem;transition:transform 1.5s cubic-bezier(.5,0,1,.6);position:relative;z-index:2}
+#cover.go #rocket{transform:translateY(-130vh)}
+#cover.go .launch{opacity:0}
+.flame{transform-origin:50% 0;animation:fl .15s infinite alternate}
+@keyframes fl{to{transform:scaleY(1.5)}}
+/* hero */
+#hero{padding-top:5rem}
+.hero-t{font-size:clamp(2.6rem,11vw,4rem);font-weight:800;color:#fff}
+.hero-t span{color:var(--sol)}
+.planet{position:absolute;border-radius:50%;z-index:0;animation:bob 6s ease-in-out infinite}
+/* cuenta */
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.count div{background:var(--noche2);border:3px solid var(--menta);border-radius:20px;padding:.9rem .2rem}
+.count b{display:block;font:800 2.3rem 'Baloo 2',sans-serif;color:var(--menta);line-height:1}
+.count span{font-size:.85rem;font-weight:700}
+/* misión */
+.tl{display:grid;gap:1rem}
+.step{display:flex;align-items:center;gap:1rem}
+.step .ic{flex:0 0 66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.step time{font:800 1.5rem 'Baloo 2',sans-serif}
+.step p{font-size:.98rem;opacity:.8}
+/* lugar */
+.place h3{font-size:1.7rem}
+.place p{margin:.2rem 0 1rem}
+/* vestimenta */
+.sw{display:inline-block;width:52px;height:52px;border-radius:50%;margin:.3rem;border:3px solid #fff}
+/* regalos */
+.gift{display:flex;gap:1rem;align-items:center;margin-bottom:.9rem}
+.gift .ic{font-size:2.2rem}
+.gift h3{font-size:1.35rem}
+/* galería */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.5rem}
+.gal i{aspect-ratio:1;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden}
+.gal img{width:100%;height:100%;object-fit:cover}
+.gal i:nth-child(1){background:var(--cohete)}.gal i:nth-child(2){background:var(--menta)}.gal i:nth-child(3){background:var(--sol)}
+.gal i:nth-child(4){background:#7d6bff}.gal i:nth-child(5){background:#ff8fb8}.gal i:nth-child(6){background:#4fb3ff}
+/* rsvp */
+.step2{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;border-bottom:2px dashed rgba(31,23,87,.2)}
+.step2:last-of-type{border:0}
+.ctr{display:flex;align-items:center;gap:.8rem}
+.ctr button{width:42px;height:42px;border-radius:50%;border:0;background:var(--menta);color:var(--tinta);font:800 1.5rem 'Nunito',sans-serif;cursor:pointer}
+.ctr output{font:800 1.6rem 'Baloo 2',sans-serif;min-width:1.6em;text-align:center}
+/* pase */
+.pass{max-width:320px;margin:0 auto;background:var(--luna);color:var(--tinta);border-radius:26px;overflow:hidden;text-align:center}
+.pass .top{background:var(--cohete);color:#fff;padding:.8rem;font:800 1.2rem 'Baloo 2',sans-serif}
+.pass .body{padding:1.2rem}
+.pass h3{font-size:2rem}
+#qr{width:160px;height:160px;margin:.8rem auto;background:#fff;padding:6px;border-radius:12px;border:3px dashed var(--noche)}
+#qr svg{width:100%;height:100%}
+.pass .cut{border-top:3px dashed rgba(31,23,87,.3);margin:0 -1.2rem 1rem}
+/* flotantes */
+#music{position:fixed;right:12px;top:calc(12px + env(safe-area-inset-top,0px));z-index:50;width:48px;height:48px;border-radius:50%;border:0;background:var(--sol);color:var(--tinta);font-size:1.4rem;cursor:pointer;display:none;box-shadow:0 4px 0 #c99a12}
+#music.on{display:block}
+#rsvp{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:50;background:#25d366;color:#073b1b;border-radius:999px;padding:.8rem 1.5rem;font-weight:800;text-decoration:none;box-shadow:0 5px 0 #168a40,0 10px 20px rgba(0,0,0,.3);display:none;white-space:nowrap}
+#rsvp.on{display:inline-block}
+.conf{position:fixed;top:-20px;width:10px;height:14px;z-index:70;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+footer{text-align:center;padding:2rem 1rem 7rem;position:relative;z-index:1;font:800 1.6rem 'Baloo 2',sans-serif;color:var(--sol)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}#rocket{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="locked">
+<div id="stars"></div>
+
+<!-- PORTADA -->
+<div id="cover">
+  <p class="k" id="cvGuest">¡Estás invitado a la misión!</p>
+  <h1>Mateo</h1>
+  <div class="age" aria-label="5 años">5</div>
+  <p class="date">Sábado 21 de noviembre · 4:00 pm</p>
+  <svg id="rocket" viewBox="0 0 100 150" aria-hidden="true">
+    <g class="flame"><path d="M38 100 Q50 150 62 100Z" fill="#ffc93c"/><path d="M44 100 Q50 130 56 100Z" fill="#ff5d4a"/></g>
+    <path d="M50 8 Q80 38 74 96 L26 96 Q20 38 50 8Z" fill="#fff6e0"/>
+    <path d="M26 70 L6 104 L30 96Z M74 70 L94 104 L70 96Z" fill="#ff5d4a"/>
+    <circle cx="50" cy="52" r="13" fill="#3fd6b0" stroke="#1f1757" stroke-width="4"/>
+    <rect x="30" y="92" width="40" height="8" rx="3" fill="#1f1757"/>
+  </svg>
+  <button class="btn rojo launch" id="openBtn" style="margin-top:1.4rem;font-size:1.3rem">¡Despegar! 🚀</button>
+</div>
+
+<button id="music" aria-label="Silenciar música">♪</button>
+<a id="rsvp" href="#" target="_blank" rel="noopener">Confirmar asistencia</a>
+
+<main>
+<!-- BIENVENIDA -->
+<section id="hero">
+  <div class="planet" style="width:70px;height:70px;background:var(--menta);left:6%;top:3rem"></div>
+  <div class="planet" style="width:44px;height:44px;background:#ff8fb8;right:8%;top:9rem;animation-delay:-2s"></div>
+  <p style="font-weight:800;color:var(--menta)">Comandante Mateo cumple</p>
+  <h2 class="hero-t">¡5 años de <span>aventuras</span> en el espacio!</h2>
+  <p class="lead" style="margin-top:1rem">Ponte tu traje de astronauta: te necesitamos para una misión llena de pastel, juegos y mucha diversión.</p>
+</section>
+
+<!-- CUENTA -->
+<section>
+  <h2>Cuenta regresiva</h2>
+  <p class="lead">para el despegue</p>
+  <div class="count" role="timer">
+    <div><b id="d">0</b><span>días</span></div><div><b id="h">0</b><span>horas</span></div>
+    <div><b id="m">0</b><span>min</span></div><div><b id="s">0</b><span>seg</span></div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section>
+  <h2>Plan de la misión</h2>
+  <p class="lead">Así será la tarde</p>
+  <div class="tl">
+    <div class="step"><div class="ic" style="background:var(--cohete)">🚀</div><div style="text-align:left"><time>4:00 pm</time><p>Llegada de los astronautas y registro</p></div></div>
+    <div class="step"><div class="ic" style="background:var(--menta)">🪐</div><div style="text-align:left"><time>4:30 pm</time><p>Juegos, brincolines y exploración</p></div></div>
+    <div class="step"><div class="ic" style="background:var(--sol)">🍕</div><div style="text-align:left"><time>5:30 pm</time><p>Comida de la tripulación</p></div></div>
+    <div class="step"><div class="ic" style="background:#ff8fb8">🎂</div><div style="text-align:left"><time>6:15 pm</time><p>Pastel, canción y piñata</p></div></div>
+    <div class="step"><div class="ic" style="background:#7d6bff">🌙</div><div style="text-align:left"><time>7:30 pm</time><p>Aterrizaje y bolsitas sorpresa</p></div></div>
+  </div>
+</section>
+
+<!-- LUGAR -->
+<section>
+  <h2>Base de lanzamiento</h2>
+  <p class="lead">Elige tu mapa favorito</p>
+  <div class="card place" style="text-align:center">
+    <h3>Salón Estrella Fugaz</h3>
+    <p>Av. de los Cometas 245, Col. Jardines</p>
+    <a class="btn sm menta" data-map="google" data-q="Salón Estrella Fugaz, Av. de los Cometas 245, Col. Jardines" target="_blank" rel="noopener">Google Maps</a>
+    <a class="btn sm" data-map="waze" data-q="Salón Estrella Fugaz, Av. de los Cometas 245, Col. Jardines" target="_blank" rel="noopener">Waze</a>
+  </div>
+</section>
+
+<!-- VESTIMENTA -->
+<section>
+  <h2>Traje de astronauta</h2>
+  <p class="lead">Ven cómodo y con ganas de jugar. Disfraces de astronauta, planeta o estrella son bienvenidos.</p>
+  <div><span class="sw" style="background:#1f1757"></span><span class="sw" style="background:var(--cohete)"></span><span class="sw" style="background:var(--sol)"></span><span class="sw" style="background:var(--menta)"></span></div>
+  <p style="margin-top:.8rem;font-size:.98rem;opacity:.85">Colores de la misión. Tenis cómodos, que habrá mucho que correr.</p>
+</section>
+
+<!-- REGALOS -->
+<section>
+  <h2>Mesa de regalos</h2>
+  <p class="lead">Tu compañía es lo más importante. Si quieres tener un detalle:</p>
+  <div class="card gift"><div class="ic">🎁</div><div><h3>Amazon</h3><a class="btn sm menta" href="https://www.amazon.com.mx/gp/registry" target="_blank" rel="noopener">Ver lista</a></div></div>
+  <div class="card gift"><div class="ic">🧸</div><div><h3>Liverpool</h3><a class="btn sm menta" href="https://www.liverpool.com.mx/tienda/mesa-de-regalos" target="_blank" rel="noopener">Ver mesa</a></div></div>
+  <div class="card gift"><div class="ic">✉️</div><div><h3>Lluvia de sobres</h3><p style="font-size:.95rem">Habrá un buzón en la fiesta.</p></div></div>
+</section>
+
+<!-- GALERÍA -->
+<section>
+  <h2>Álbum espacial</h2>
+  <p class="lead">Fotos de Mateo y su aventura</p>
+  <div class="gal" id="gal"><i>🚀</i><i>⭐</i><i>🪐</i><i>🌙</i><i>👩‍🚀</i><i>🛸</i></div>
+  <a class="btn" id="upload" href="https://photos.google.com" target="_blank" rel="noopener">Subir mis fotos</a>
+</section>
+
+<!-- RSVP -->
+<section id="confirma">
+  <h2>¿Vienes a la misión?</h2>
+  <p class="lead">Cuéntanos cuántos viajan en tu nave</p>
+  <div class="card">
+    <div class="step2"><b>Niños</b><div class="ctr"><button data-k="n" data-v="-1" aria-label="Menos niños">−</button><output id="oN">1</output><button data-k="n" data-v="1" aria-label="Más niños">+</button></div></div>
+    <div class="step2"><b>Adultos</b><div class="ctr"><button data-k="a" data-v="-1" aria-label="Menos adultos">−</button><output id="oA">1</output><button data-k="a" data-v="1" aria-label="Más adultos">+</button></div></div>
+    <a class="btn" id="rsvp2" href="#" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:1rem;background:#25d366;box-shadow:0 5px 0 #168a40">Confirmar por WhatsApp</a>
+  </div>
+</section>
+
+<!-- PASE -->
+<section>
+  <h2>Tarjeta de astronauta</h2>
+  <p class="lead">Enséñala en la entrada</p>
+  <div class="pass">
+    <div class="top">PASE DE ABORDAJE</div>
+    <div class="body">
+      <p style="font-size:.9rem">Tripulante</p>
+      <h3 id="pName">Invitado especial</h3>
+      <div id="qr" role="img" aria-label="Código QR de tu pase"></div>
+      <div class="cut"></div>
+      <p class="big" id="pNum" style="font-size:1.3rem">Nº 0000</p>
+      <p id="pSeats" style="font-size:.95rem">1 niño · 1 adulto</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer>¡Te esperamos, astronauta! 🚀</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+/* ====== CONFIGURA AQUÍ ====== */
+const CFG={
+  fecha:new Date('2026-11-21T16:00:00-06:00'),
+  whatsapp:'5219511234567',   // lada + número, sin + ni espacios
+  festejado:'Mateo',
+  musica:'',                  // URL directa a un .mp3; vacío = melodía integrada
+  fotos:[]                    // URLs para el álbum
+};
+/* Personaliza: ?invitado=Familia%20Pérez&ninos=2&adultos=2&boleto=0042 */
+const $=id=>document.getElementById(id),q=new URLSearchParams(location.search);
+const guest=q.get('invitado')||'';
+const cnt={n:Math.max(0,parseInt(q.get('ninos')||'1',10)||0),a:Math.max(0,parseInt(q.get('adultos')||'1',10)||0)};
+const hash=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%9000;return String(h+1000)};
+const ticket=q.get('boleto')||hash(guest||'general');
+
+if(guest){$('cvGuest').textContent=guest+', ¡estás invitado a la misión!';$('pName').textContent=guest}
+$('pNum').textContent='Nº '+ticket;
+
+/* estrellas */
+const st=$('stars');for(let i=0;i<70;i++){const e=document.createElement('i'),z=Math.random()*3+1;
+  e.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;animation-delay:'+Math.random()*3+'s';st.appendChild(e)}
+
+/* cuenta */
+function tick(){const t=Math.max(0,CFG.fecha-Date.now())/1000;
+  $('d').textContent=Math.floor(t/86400);$('h').textContent=Math.floor(t%86400/3600);$('m').textContent=Math.floor(t%3600/60);$('s').textContent=Math.floor(t%60)}
+tick();setInterval(tick,1000);
+
+/* mapas */
+document.querySelectorAll('[data-map]').forEach(a=>{const e=encodeURIComponent(a.dataset.q);
+  a.href=a.dataset.map==='waze'?'https://waze.com/ul?q='+e+'&navigate=yes':'https://www.google.com/maps/search/?api=1&query='+e});
+
+/* galería */
+if(CFG.fotos.length)$('gal').innerHTML=CFG.fotos.map(u=>'<i><img src="'+u+'" alt="Foto de '+CFG.festejado+'" loading="lazy"></i>').join('');
+
+/* asistencia + pase (se actualizan juntos) */
+function plural(n,s,p){return n+' '+(n===1?s:p)}
+function sync(){
+  $('oN').textContent=cnt.n;$('oA').textContent=cnt.a;
+  const people=plural(cnt.n,'niño','niños')+' y '+plural(cnt.a,'adulto','adultos');
+  const msg='¡Hola! Soy '+(guest||'[Nombre del invitado]')+' y confirmamos asistencia al cumple de '+CFG.festejado+': '+people+'. Boleto Nº '+ticket+'.';
+  const url='https://wa.me/'+CFG.whatsapp+'?text='+encodeURIComponent(msg);
+  $('rsvp').href=url;$('rsvp2').href=url;
+  $('pSeats').textContent=plural(cnt.n,'niño','niños')+' · '+plural(cnt.a,'adulto','adultos');
+  try{const qr=qrcode(0,'M');qr.addData('CUMPLE|'+CFG.festejado+'|'+(guest||'General')+'|'+ticket+'|N'+cnt.n+'A'+cnt.a);qr.make();
+    $('qr').innerHTML=qr.createSvgTag({cellSize:4,margin:0,scalable:true})}catch(e){$('qr').textContent='Boleto '+ticket}
+}
+document.querySelectorAll('.ctr button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;cnt[k]=Math.max(0,Math.min(20,cnt[k]+parseInt(b.dataset.v,10)));sync()});
+sync();
+
+/* música: caja musical alegre */
+let audio=null,ctx=null,master=null,timer=null,playing=false;
+function box(){ctx=new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.35;master.connect(ctx.destination);
+  const sc=[523.3,587.3,659.3,784,880,1046.5],mel=[0,2,4,2,3,1,2,0, 4,5,4,3,2,1,0,2];let i=0;
+  const note=(f,t,d)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='triangle';o.frequency.value=f;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.5,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(master);o.start(t);o.stop(t+d)};
+  const step=()=>{const t=ctx.currentTime+.05,n=mel[i%mel.length];note(sc[n],t,.55);if(i%4===0)note(sc[n]/2,t,.9);i++};
+  step();timer=setInterval(step,420)}
+function startMusic(){try{if(CFG.musica){audio=audio||Object.assign(new Audio(CFG.musica),{loop:true,volume:.6});audio.play()}else if(!ctx)box();else ctx.resume();playing=true;$('music').textContent='♪'}catch(e){}}
+function stopMusic(){if(audio)audio.pause();if(ctx)ctx.suspend();playing=false;$('music').textContent='🔇'}
+$('music').onclick=()=>{playing?stopMusic():startMusic();$('music').setAttribute('aria-label',playing?'Silenciar música':'Activar música')};
+
+/* confeti */
+function confetti(){const c=['#ff5d4a','#ffc93c','#3fd6b0','#ff8fb8','#7d6bff'];
+  for(let i=0;i<46;i++){const e=document.createElement('div');e.className='conf';
+    e.style.cssText='left:'+Math.random()*100+'%;background:'+c[i%5]+';animation-duration:'+(2+Math.random()*2.2)+'s;animation-delay:'+Math.random()*.6+'s;border-radius:'+(i%2?'50%':'2px');
+    document.body.appendChild(e);setTimeout(()=>e.remove(),5200)}}
+
+/* despegue */
+$('openBtn').onclick=()=>{startMusic();$('cover').classList.add('go');
+  setTimeout(()=>{$('cover').classList.add('gone');document.body.classList.remove('locked');$('music').classList.add('on');$('rsvp').classList.add('on');confetti()},1300);
+  setTimeout(()=>{$('cover').style.display='none'},2200)};
+</script>
+</body>
+</html>
